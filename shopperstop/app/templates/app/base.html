@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+{% load static%}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'app/css/owl.carousel.min.css' %}">
+        <link rel="stylesheet" href="{% static 'app/css/all.min.css' %}">
+        <link rel="stylesheet" href="{% static 'app/css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'app/css/style.css' %}">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        
+        <title>ShopperStop | {% block title %}{% endblock title %}</title>
+        <style>
+            * {
+                font-family: 'Kumbh Sans', sans-serif;
+            }
+            
+            body, p, h1, h2, h3, h4, h5, h6, a, span, div, button, input, textarea {
+                font-family: 'Kumbh Sans', sans-serif !important;
+            }
+            body {
+                {% comment %} background: linear-gradient(120deg, #ff9a9e, #fad0c4); {% endcomment %}
+                transition: background 0.5s ease-in-out;
+            }
+            .image {
+                transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            }
+            
+            .image:hover {
+                transform: scale(1.05);
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            }
+            
+            .btn {
+                transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+            }
+            
+            .btn:hover {
+                transform: scale(1.05);
+            }
+            .btn-primary {
+                background: linear-gradient(45deg, #ff6600, #ff9900);
+                border: none;
+                transition: background 0.3s ease-in-out;
+            }
+            
+            .btn-primary:hover {
+                background: linear-gradient(45deg, #ff4500, #ff6600);
+            }
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+            .stylish-brand {
+                font-family: 'Poppins', sans-serif;
+                font-size: 2rem;
+                text-decoration: none;
+                font-weight: bold;
+                display: flex;
+                align-items: center;
+                color: #ff5733;  /* Set default color */
+                transition: all 0.4s ease-in-out;
+                position: relative;
+            }
+
+            .stylish-brand:hover {
+                transform: scale(1.1);
+                filter: drop-shadow(0px 0px 10px rgba(255, 87, 51, 0.7));
+            }
+
+            .brand-icon {
+                margin-right: 10px;
+                font-size: 1.8rem;
+                color: #ff5733;
+                animation: bounce 1s infinite alternate;
+            }
+
+            @keyframes bounce {
+                0% { transform: translateY(0px); }
+                100% { transform: translateY(-5px); }
+            }
+
+            .stylish-brand span {
+                color:rgb(232, 124, 22);
+                font-style: italic;
+                transition: color 0.3s ease-in-out;
+            }
+
+            .stylish-brand:hover span {
+                color: #fff;
+                text-shadow: 0 0 10px rgba(255, 204, 0, 0.8);
+            }
+
+            
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+            <div class="container-fluid">
+                <a class="navbar-brand stylish-brand" href="/#" style="font-family: 'Almendra SC', serif; font-size: 1.8rem; color: black; text-decoration: none; transition: color 0.3s; padding-right: 50px;">
+                    
+                    <span class="brand-icon"><i class="fas fa-shopping-bag"></i></span>Shoppér<span>Stop</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-4">
+                        {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link active text-black" href="/">Home</a>
+                        </li>
+                        <li class="nav-item dropdown position-relative">
+                            <a class="nav-link dropdown-toggle text-black" href="#" id="productsDropdown" role="button">
+                                Products
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="productsDropdown">
+                                <li><a class="dropdown-item" href="{% url 'category' 'MW' %}">Mens Wear</a></li>
+                                <li><a class="dropdown-item" href="{% url 'category' 'WW' %}">Womens wear</a></li>
+                                <li><a class="dropdown-item" href="{% url 'category' 'PW' %}">Party Wear</a></li>
+                                <li><a class="dropdown-item" href="{% url 'category' 'SH' %}">Shoes</a></li>
+                                <li><a class="dropdown-item" href="{% url 'category' 'BG' %}">Bags</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-black" href="{% url 'about' %}">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-black" href="{% url 'contact' %}">Contact Us</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex position-relative" role="search" action="/search">
+                        <input class="form-control me-2 rounded-pill" type="search" placeholder="Search..." name="search" aria-label="Search">
+                        <button class="btn position-absolute end-0 top-50 translate-middle-y text-black" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </form>
+                    <ul class="navbar-nav ms-auto gap-3">
+                        <li class="nav-item dropdown position-relative">
+                            <a class="nav-link dropdown-toggle text-black" id="profileDropdown" href="#">
+                                Tejesh
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                                <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
+                                <li><a class="dropdown-item" href="{% url 'orders' %}">Orders</a></li>
+                                <li><a class="dropdown-item" href="{% url 'passwordchange' %}">Change Password</a></li>
+                                <li>
+                                    <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                                        {% csrf_token %}
+                                        <button type="submit" class="dropdown-item">Logout</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item mx-1">
+                            <a class="nav-link text-black" href="{% url 'showcart' %}">
+                                <span class="badge bg-danger">{% if totalitem > 0 %}{{totalitem}}{% endif %}</span>
+                                <i class="fa fa-shopping-cart"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item mx-1">
+                            <a class="nav-link text-black" href="{% url 'showwishlist' %}">
+                                <span class="badge bg-danger">{% if wishitem > 0 %}{{wishitem}}{% endif %}</span>
+                                <i class="fa fa-heart"></i>
+                            </a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item mx-2">
+                            <a class="nav-link text-black" href="{% url 'login' %}">Login</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link text-black" href="{% url 'customerregistration' %}">Registration</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        <style>
+            .container-fluid{
+                height: 60px;
+            }
+            .nav-link{
+                font-size: 19px;
+            }
+            .navbar-light .navbar-nav .nav-link {
+                transition: color 0.3s ease-in-out;
+                color: black;
+            }
+        
+            .navbar-light .navbar-nav .nav-link:hover {
+                color: #ff6600 !important;
+            }
+        
+            /* Navbar brand hover effect */
+            .navbar-light .navbar-brand {
+                transition: color 0.3s ease-in-out;
+                color: black;
+            }
+        
+            .navbar-light .navbar-brand:hover {
+                color: #ff6600 !important;
+            }
+        
+            /* Dropdown hover effects */
+            .dropdown-menu {
+                transition: transform 0.3s ease, opacity 0.3s ease;
+                transform: translateY(10px);
+                opacity: 0;
+                display: none;
+            }
+        
+            .dropdown:hover .dropdown-menu {
+                display: block;
+                transform: translateY(0);
+                opacity: 1;
+            }
+        
+            /* Change dropdown menu item color on hover */
+            .dropdown-menu .dropdown-item {
+                transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+            }
+        
+            .dropdown-menu .dropdown-item:hover {
+                background-color: #ff6600;
+                color: white;
+            }
+            
+            
+            /* Input field hover and focus */
+            .form-control {
+                width: 250px;
+                transition: width 0.4s ease-in-out, box-shadow 0.3s ease-in-out;
+            }
+        
+            .form-control:focus {
+                width: 300px;
+                outline: none;
+                box-shadow: 0px 0px 5px rgba(255, 102, 0, 0.7);
+            }
+        
+            /* Button hover */
+            .btn i {
+                font-size: 1.2rem;
+                transition: color 0.3s ease-in-out;
+            }
+        
+            .btn:hover {
+                color: #ff6600;
+            }
+        </style>
+        
+        
+
+          {% block banner-slider %}{% endblock banner-slider %}
+          {% block information %}{% endblock information %}
+          {% block featured-section %}{% endblock featured-section %}
+          {% block popular %}{% endblock popular %}
+          {% block pic %}{% endblock pic %}
+          {% block sale-timer-section %}{% endblock sale-timer-section %}
+          {% block main %}{% endblock main %}
+          {% block shop %}{% endblock shop %}
+          {% block info %}{% endblock info %}
+          {% block footer %}{% endblock footer %}
+          {% block main-content  %}{% endblock main-content  %}
+          {% block payment-gateway %}{% endblock payment-gateway %}
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  
+        <script src="{% static 'app/js/owl.carousel.min.js' %}" ></script>
+        <script src="{% static 'app/js/all.min.js' %}" ></script>
+        <script src="{% static 'app/js/myscript.js' %}" ></script> 
+
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    </body>
+</html>

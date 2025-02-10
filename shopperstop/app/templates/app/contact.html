@@ -1,0 +1,386 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Contact Us{% endblock title %}
+{% block banner-slider %}
+<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="banner-slide" style="position: relative;">
+                <img src="{% static 'app/images/banner/b4.jpg' %}" class="d-block w-100" alt="banner_image">
+
+                <!-- Text Content -->
+                <div class="banner-content">
+                    <h2>Get In Touch</h2>
+                    <p>We value the connection with our community and are here to assist in any way we can. Feel free to reach out through the following channels:</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="contact-container">
+    <!-- Contact Form -->
+    <div class="contact-form">
+        <h2>Get In Touch</h2>
+        <p>Use the form below to get in touch with the sales team</p>
+        <form>
+            <input type="text" placeholder="Your Name*" required>
+            <input type="email" placeholder="Your Email*" required>
+            <textarea placeholder="Your Message*" rows="5" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+
+    <!-- Contact Information -->
+    <div class="contact-info">
+        <h2>Information</h2>
+        <p><span>Phone:</span> +1 999 999 9999</p>
+        <p><span>Email:</span> shopperstopt@gmail.com</p>
+        <p><span>Address:</span> 2163 Phillips Gap Rd, West Jefferson, Paris, France</p>
+        <p><span>Open Time:</span></p>
+        <p>Mon – Sat: 7:30am – 8:00pm PST</p>
+        <p>Sunday: 9:00am – 5:00pm PST</p>
+    </div>
+</div>
+
+<!-- Map Section -->
+<div class="map-container">
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2620.446769679585!2d2.2919047230827165!3d48.85837075572313!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e2964e34e2d%3A0x8ddca9ee380ef7e0!2sEiffel%20Tower!5e0!3m2!1sen!2sin!4v1738841782082!5m2!1sen!2sin" width="100%" height="550" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    
+</div>
+
+<style>
+  /* Banner Content Styling */
+  .banner-content {
+      position: absolute;
+      top: 50%;
+      left: 10%;
+      transform: translateY(-50%);
+      max-width: 40%;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 8px;
+      color: #333;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 1s ease-in-out;
+  }
+
+  .banner-content h2 {
+      font-size: 1rem;
+      letter-spacing: 2px;
+      color: #111;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+  }
+
+  .banner-content p {
+      font-size: 2rem;
+      line-height: 1.6;
+      color: #555;
+  }
+
+  /* Contact Section Styling */
+  .contact-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 50px;
+      padding-left: 80px;
+      background: #f9f9f9;
+      animation: slideIn 1.2s ease-in-out;
+      padding-top:70px;
+      padding-bottom:80px;
+  }
+
+  .contact-form {
+      flex: 1;
+      margin-right: 50px;
+  }
+
+  .contact-form h2 {
+      font-size: 2.1rem;
+      margin-bottom: 10px;
+      color: #222;
+  }
+
+  .contact-form p {
+      font-size: 1rem;
+      margin-bottom: 20px;
+      color: #555;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      padding-bottom:15px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 15px;
+      font-size: 1rem;
+      transition: box-shadow 0.3s ease;
+  }
+
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      outline: none;
+  }
+
+  .contact-form button {
+      background: #000;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 15px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+  }
+
+  .contact-form button:hover {
+      background: #333;
+  }
+
+  .contact-info {
+      flex: 1;
+      max-width: 400px;
+  }
+
+  .contact-info h2 {
+      font-size: 2.1rem;
+      margin-bottom: 20px;
+      color: #222;
+  }
+
+  .contact-info p {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: #555;
+      padding-bottom: 10px;
+  }
+
+  .contact-info p span {
+      font-weight: bold;
+      color: #333;
+  }
+
+  /* Map Section Styling */
+  .map-container {
+      margin-top: 0px;
+      animation: fadeIn 1.5s ease-in-out;
+  }
+
+  /* Keyframe Animations */
+  @keyframes fadeIn {
+      from {
+          opacity: 0;
+          transform: translateY(20px);
+      }
+      to {
+          opacity: 1;
+          transform: translateY(0);
+      }
+  }
+
+  @keyframes slideIn {
+      from {
+          opacity: 0;
+          transform: translateX(-50px);
+      }
+      to {
+          opacity: 1;
+          transform: translateX(0);
+      }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+      .contact-container {
+          flex-direction: column;
+      }
+
+      .contact-form,
+      .contact-info {
+          margin: 0 0 20px 0;
+          flex: 1;
+      }
+
+      .banner-content {
+          max-width: 80%;
+          left: 5%;
+      }
+  }
+</style>
+{% endblock banner-slider %}
+
+{% block shop %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Hero Section</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+        }
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 90vh;
+            background: linear-gradient(
+                rgba(0, 0, 0, 0.2), /* Added overlay for transparency */
+                rgba(0, 0, 0, 0.2)
+            ), url("{% static 'app/images/banner/couple.jpg' %}") no-repeat center center/cover;
+            display: flex;
+            align-items: flex-end; /* Align content to the bottom */
+            justify-content: flex-end; /* Align content to the right */
+            color: white;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+            padding-bottom: 55px;
+        }
+        .hero.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .hero-content {
+            background: rgba(0, 0, 0, 0.7); /* Slightly reduced transparency */
+            padding: 20px 40px;
+            border-radius: 8px;
+            margin: 20px; /* Added margin for spacing from the edges */
+        }
+        h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: right; /* Text aligned to the right */
+        }
+        p {
+            font-size: 1.2rem;
+            margin: 10px 0;
+            text-align: right; /* Text aligned to the right */
+            color: white;
+        }
+        .shop-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            margin-top: 20px;
+            font-size: 1rem;
+            color: white;
+            background: transparent;
+            border: 2px solid white;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+        }
+        .shop-btn:hover {
+            background: white;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <h1>Discover Fashion Excellence</h1>
+            <p style="color: white;">ShopperStop brings you the latest trends with a touch of elegance. Elevate your style now.</p>
+            <a href="index.html" class="shop-btn">SHOP NOW</a>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const heroSection = document.getElementById("hero");
+            function handleScroll() {
+                if (window.scrollY >= 50) {
+                    heroSection.classList.add("active");
+                }
+            }
+            window.addEventListener("scroll", handleScroll);
+        });
+    </script>
+</body>
+</html>
+{% endblock shop %}
+
+{% block footer %}
+<div class="footer">
+    <div class="footer-column">
+        <h3>Menu</h3>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Shop</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+    </div>
+    <div class="footer-column">
+        <h3>Categories</h3>
+        <ul>
+            <li><a href="#">Casual</a></li>
+            <li><a href="#">Work & Office</a></li>
+            <li><a href="#">Activewear</a></li>
+            <li><a href="#">Evening Dresses</a></li>
+        </ul>
+    </div>
+    <div class="footer-column">
+        <h3>Resources</h3>
+        <ul>
+            <li><a href="#">Contact Support</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Live Chat</a></li>
+            <li><a href="#">Returns</a></li>
+        </ul>
+    </div>
+    <div class="footer-column">
+        <h3>Social Media</h3>
+        <ul>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Pinterest</a></li>
+        </ul>
+    </div>
+</div>
+
+<style>
+.footer {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    background-color: #f8f8f8;
+    font-family: 'Arial', sans-serif;
+    color: #222;
+    width: 100%;
+    padding-left: 220px;
+    padding-top: 50px;
+}
+.footer-column {
+    flex: 1;
+    padding: 10px;
+}
+h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+ul {
+    list-style: none;
+    padding: 0;
+}
+li {
+    margin: 5px 0;
+}
+li a {
+    text-decoration: none;
+    color: #555;
+    font-size: 14px;
+}
+</style>
+{% endblock footer %}

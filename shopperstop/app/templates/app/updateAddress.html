@@ -1,0 +1,111 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %}Address{% endblock title %}
+
+{% block main-content %}
+<div class="container-fluid">
+    <!-- Sidebar menu and content -->
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-sm-3 border-end sidebar-menu">
+            <a href="{% url 'profile' %}" class="btn btn-danger w-70">Profile</a>
+            <a href="{% url 'address' %}" class="btn btn-dark w-70 mt-2">Address</a>
+        </div>
+
+        <!-- Main content -->
+        <div class="col-sm-9">
+            <h3 class="mb-4 text-center" style="padding-top:20px;">Welcome <span class="text-capitalize text-danger">{{ request.user }}</span></h3>
+            <form action="" method="post" id="addressForm" class="px-3">
+                {% csrf_token %}
+                {% for fm in form %}
+                    <div class="mb-3">
+                        {{ fm.label_tag }}
+                        {{ fm }}
+                        <small class="text-danger">{{ fm.errors|striptags }}</small>
+                    </div>
+                {% endfor %}
+                <div class="col-12 mt-3 text-center">
+                    <button type="submit" class="btn btn-danger" id="submitBtn">Submit</button>
+                    <a href="{% url 'address' %}" class="btn btn-dark">Back</a>
+                </div>
+
+                {% if form.non_field_errors %}
+                    {% for error in form.non_field_errors %}
+                        <p class="alert alert-danger my-3">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+
+                {% if messages %}
+                    {% for msg in messages %}
+                        <div class="alert alert-{{ msg.tags }}" role="alert">{{ msg }}</div>
+                    {% endfor %}
+                {% endif %}
+            </form>
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const form = document.getElementById("addressForm");
+                    const submitBtn = document.getElementById("submitBtn");
+
+                    form.addEventListener("input", function () {
+                        submitBtn.classList.add("btn-success");
+                    });
+
+                    form.addEventListener("submit", function (e) {
+                        submitBtn.innerHTML = "Submitting...";
+                        submitBtn.disabled = true;
+                        setTimeout(() => {
+                            submitBtn.innerHTML = "Submit";
+                            submitBtn.disabled = false;
+                        }, 2000);
+                    });
+                });
+            </script>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Apply gradient background */
+    body {
+        background: linear-gradient(120deg, #ff9a9e, #fad0c4);
+        min-height: 100vh;
+        margin: 0;
+    }
+
+    .btn {
+        transition: all 0.3s ease-in-out;
+        border-radius: 50px;
+        width: 250px;
+    }
+
+    .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .form-control {
+        transition: 0.3s ease-in-out;
+        border-radius: 10px;
+        border: 2px solid #ff758c;
+    }
+
+    .form-control:focus {
+        border-color: #ff758c;
+        box-shadow: 0 0 10px rgba(255, 117, 140, 0.5);
+    }
+
+    .sidebar-menu {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding-top: 85px;
+        padding-left: 40px;
+    }
+
+    .alert {
+        margin-top: 20px;
+    }
+</style>
+{% endblock main-content %}

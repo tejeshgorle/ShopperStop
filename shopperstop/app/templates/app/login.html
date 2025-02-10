@@ -1,0 +1,92 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Login{% endblock title %}
+
+{% block main-content %}
+<div class="gradient-background container my-5">
+    <div class="row">
+        <div class="col-sm-6 offset-sm-3 login-container p-5">
+            <h3 class="text-center mb-4">Login</h3>
+            <hr>
+            <form action="" method="post" novalidate class="p-4 shadow-sm">
+                {% csrf_token %}
+                {% for fm in form %}
+                    <div class="mb-3">
+                        {{ fm.label_tag }} 
+                        {{ fm }}
+                        <small class="text-danger">{{ fm.errors|striptags }}</small>
+                    </div>
+                {% endfor %}
+                <div class="text-end">
+                    <small><a href="{% url 'password_reset' %}" class="text-danger">Forgot Password?</a></small>
+                </div>
+                <div class="d-grid gap-2 mt-4">
+                    <input type="submit" value="Login" class="btn btn-gradient">
+                </div>
+                <div class="text-center text-primary fw-bold mt-3">
+                    <small>New User? <a href="{% url 'customerregistration' %}" class="text-danger">Create an Account</a></small>
+                </div>
+                {% if form.non_field_errors %}
+                    {% for error in form.non_field_errors %}
+                        <p class="alert alert-danger my-3">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Gradient Background */
+    body{
+        background: linear-gradient(120deg, #ff9a9e, #fad0c4);
+    }
+    .gradient-background {
+        background: linear-gradient(120deg, #ff9a9e, #fad0c4);
+        min-height: 100vh;
+        border-radius: 20px;
+        padding: 30px;
+    }
+
+    /* Login Container */
+    .login-container {
+        background: linear-gradient(135deg, #ffffff, #f8f9fa);
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* Button Styles */
+    .btn-gradient {
+        background: linear-gradient(45deg, #ff758c, #f39c12);
+        color: white;
+        border-radius: 50px;
+        border: none;
+        padding: 10px 20px;
+        font-weight: bold;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .btn-gradient:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Input Field Styling */
+    .form-control {
+        border-radius: 10px;
+        border: 2px solid #ff758c;
+        transition: 0.3s ease-in-out;
+    }
+
+    .form-control:focus {
+        border-color: #ff758c;
+        box-shadow: 0 0 10px rgba(255, 117, 140, 0.5);
+    }
+
+    /* Forgot Password Link */
+    .text-danger:hover {
+        text-decoration: underline;
+    }
+</style>
+{% endblock main-content %}

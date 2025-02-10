@@ -1,0 +1,99 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Address{% endblock title %}
+
+{% block main-content %}
+<div class="container my-5">
+    <div class="row">
+        <h3 class="mb-4">Welcome <span class="text-capitalize text-danger">{{ request.user }}</span></h3>
+        <div class="col-sm-2 border-end sidebar-menu">
+            <ul class="list-unstyled">
+                <li class="d-grid">
+                    <a href="{% url 'profile' %}" class="btn btn-danger">Profile</a>
+                </li>
+                <li class="d-grid">
+                    <a href="{% url 'address' %}" class="btn btn-dark mt-2">Address</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-8 offset-sm-1">
+            <div class="row">
+                {% for ad in add %}
+                <div class="col-sm-6">
+                    <div class="card address-card m-2">
+                        <div class="card-body">
+                            <h3 class="card-title">Address {{ forloop.counter }}</h3>
+                            <p><strong>Name:</strong> {{ ad.name }}</p>
+                            <p><strong>Locality:</strong> {{ ad.locality }}</p>
+                            <p><strong>Mobile:</strong> {{ ad.mobile }}</p>
+                            <p><strong>City:</strong> {{ ad.city }}</p>
+                            <p><strong>State:</strong> {{ ad.state }}</p>
+                            <p><strong>Pincode:</strong> {{ ad.zipcode }}</p>
+                            <p class="text-center">
+                                <a href="{% url 'updateAddress' pk=ad.id %}" class="btn btn-success update-btn">Update</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Apply a gradient background */
+    body {
+        background: linear-gradient(120deg, #ff9a9e, #fad0c4);
+        min-height: 100vh;
+        margin: 0;
+    }
+
+    .sidebar-menu ul {
+        padding-top: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn {
+        transition: all 0.3s ease-in-out;
+        border-radius: 50px;
+    }
+
+    .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .address-card {
+        border-radius: 15px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    }
+
+    .address-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-title {
+        color: #ff758c;
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .update-btn {
+        transition: all 0.3s ease-in-out;
+        border-radius: 25px;
+    }
+
+    .update-btn:hover {
+        transform: scale(1.1);
+        background-color: #28a745;
+        color: #fff;
+        box-shadow: 0 8px 20px rgba(40, 167, 69, 0.6);
+    }
+</style>
+{% endblock main-content %}

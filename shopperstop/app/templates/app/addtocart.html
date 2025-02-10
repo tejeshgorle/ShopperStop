@@ -1,0 +1,149 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Cart{% endblock title %}
+
+{% block main-content %}
+<div class="container my-5">
+    <div class="row">
+        {% if cart %}
+            <h1 class="text-center mb-5 text-danger">Shopping Cart</h1>
+            <div class="col-sm-8">
+                <div class="card cart-container">
+                    <div class="card-body">
+                        <h3 class="text-primary">Cart</h3>
+                        <div id="cart-items">
+                            {% for item in cart %}
+                            <div class="row align-items-center cart-item" id="cart-item-{{ item.product.id }}">
+                                <div class="col-sm-3 text-center">
+                                    <img src="{{ item.product.product_image.url }}" alt="" class="img-fluid rounded shadow" height="150" width="150">
+                                </div>
+                                <div class="col-sm-9">
+                                    <h5 class="text-dark">{{ item.product.title }}</h5>
+                                    <p class="mb-2 text-muted small">{{ item.product.description }}</p>
+                                    <div class="my-3 d-flex align-items-center">
+                                        <label for="quantity" class="me-2">Quantity:</label>
+                                        <a class="minus-cart btn text-danger" pid="{{ item.product.id }}">
+                                            <i class="fas fa-minus-square fa-lg"></i>
+                                        </a>
+                                        <span id="quantity-{{ item.product.id }}" class="mx-2">{{ item.quantity }}</span>
+                                        <a class="plus-cart btn text-success" pid="{{ item.product.id }}">
+                                            <i class="fas fa-plus-square fa-lg"></i>
+                                        </a>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <a href="#" class="remove-cart btn btn-sm btn-outline-danger" pid="{{ item.product.id }}">Remove Item</a>
+                                        <p class="mb-0"><strong>Rs. {{ item.product.discounted_price }}</strong></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="text-muted">
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="card summary-container">
+                    <div class="card-body">
+                        <h3 class="text-primary">Total Amount</h3>
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                                <strong>Amount</strong><span id="amount">Rs. {{ amount }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                <strong>Shipping</strong><span>Rs. 40.00</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                                <div>
+                                    <strong>Total</strong> <small>(including GST)</small>
+                                </div>
+                                <span id="totalamount"><strong>Rs. {{ totalamount }}</strong></span>
+                            </li>
+                        </ul>
+                        <div class="d-grid">
+                            <a href="{% url 'checkout' %}" class="btn btn-danger">Place Order</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <h1 class="text-center mb-5 text-danger">Cart is Empty</h1>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Select all "Remove Item" buttons
+        const removeButtons = document.querySelectorAll('.remove-cart');
+
+        removeButtons.forEach(function (button) {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+                const productId = button.getAttribute('pid');
+
+                // Simulate an AJAX call to remove the item
+                fetch(`/cart/remove/${productId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Remove the item from the DOM
+                        const itemDiv = document.getElementById(`cart-item-${productId}`);
+                        if (itemDiv) {
+                            itemDiv.remove();
+                        }
+
+                        // Check if the cart is now empty
+                        const remainingItems = document.querySelectorAll('.cart-item').length;
+                        if (remainingItems === 0) {
+                            const cartContainer = document.querySelector('.cart-container');
+                            cartContainer.innerHTML = '<h3 class="text-center text-danger">Cart is Empty</h3>';
+                        }
+                    } else {
+                        console.error('Failed to remove item from cart.');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+    });
+</script>
+
+<style>
+    /* Styling as before for the gradient, buttons, and layout */
+    body {
+        background: linear-gradient(120deg, #ff9a9e, #fad0c4);
+        min-height: 100vh;
+        margin: 0;
+    }
+
+    .cart-container, .summary-container {
+        background: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        padding: 20px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .cart-container:hover, .summary-container:hover {
+        transform: scale(1.02);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn {
+        border-radius: 50px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+</style>
+{% endblock main-content %}

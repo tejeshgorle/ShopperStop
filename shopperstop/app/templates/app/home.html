@@ -1,0 +1,976 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+
+<!-- Banner Slider -->
+{% block banner-slider %}
+<style>
+    /* Carousel Image Styling */
+    .carousel-item img {
+        width: 100%;
+        height: 800px;
+        object-fit: cover;
+    }
+
+    /* Overlay Styling */
+    .carousel-caption {
+        position: absolute;
+        top: 50%;
+        left: 30%;
+        transform: translate(-60%, -5%);
+        text-align: center;
+        background: rgba(66, 65, 65, 0.6); /* Dark translucent background */
+        padding: 20px 40px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        max-width: 35%;
+        height: 190px;
+    }
+
+    /* Heading & Paragraph Styling */
+    .carousel-caption h2 {
+        font-size: 3rem;
+        font-weight: bold;
+        color: #fff;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+    }
+
+    .carousel-caption p {
+        font-size: 1.5rem;
+        color: #ffcc00;
+        margin-top: 10px;
+    }
+
+
+</style>
+
+<div id="carouselExampleAutoplaying" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        {% for img in images %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}" data-bs-interval="2000">
+            <img src="{% static img.image %}" class="d-block w-100" alt="banner_image">
+            <div class="carousel-caption">
+                <h2>{{ img.title }}</h2>
+                <p>{{ img.subtitle }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    let carouselElement = document.querySelector("#carouselExampleAutoplaying");
+    new bootstrap.Carousel(carouselElement, {
+        interval: 3000,
+        wrap: true,
+        touch: true
+    });
+});
+</script>
+{% endblock banner-slider %}
+
+<!-- Categories Section -->
+{% block information %}
+<div class="container">
+    <div class="row  text-center p-5 text-white border-bottom shadow">
+        <h1 class="display-4" style="text-align:left; color:black;font-size:45px;font-family: 'Kumbh Sans', sans-serif;">Categories you might like</h1>
+        <p style="text-align:left;color:black;">Explore our curated categories and find your favorites</p>
+        <style>
+            .container{
+                padding-top: 20px;
+            }
+            .circle-card-container {
+                display: flex;
+                justify-content: space-between; /* Ensure equal spacing between the items */
+                flex-wrap: nowrap; /* Keep all items in the same row */
+                gap: 20px; /* Define consistent gap between items */
+                margin-top: 30px;
+            }
+
+            .circle-card {
+                width: 220px;
+                height: 220px;
+                border-radius: 50%;
+                overflow: hidden;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 3px;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                background-color: white;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            }
+
+            .circle-card:hover {
+                transform: scale(1.1);
+                box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+            }
+
+            .circle-card img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .circle-name {
+                text-align: center;
+                margin-top: 10px;
+                font-weight: 600;
+                font-size: 18px;
+                color: black;
+            }
+            .row{
+                background-color:rgb(241, 244, 246);
+            }
+        </style>
+
+        <div class="circle-card-container">
+            <!-- Circle Card 1 -->
+            <div>
+                <div class="circle-card">
+                    <img src="{% static 'app/images/team/n1.jpg' %}" alt="Person 1" style="padding-left:10px;">
+                </div>
+                <div class="circle-name">New in</div>
+            </div>
+
+            <!-- Circle Card 2 -->
+            <div>
+                <div class="circle-card">
+                    <img src="{% static 'app/images/team/n2.jpg' %}" alt="Person 2">
+                </div>
+                <div class="circle-name">Promotion</div>
+            </div>
+
+            <!-- Circle Card 3 -->
+            <div>
+                <div class="circle-card">
+                    <img src="{% static 'app/images/team/n3.jpg' %}" alt="Person 3">
+                </div>
+                <div class="circle-name">Clothing</div>
+            </div>
+
+            <!-- Circle Card 4 -->
+            <div>
+                <div class="circle-card">
+                    <img src="{% static 'app/images/team/n4.jpg' %}" alt="Person 4">
+                </div>
+                <div class="circle-name">Shoes</div>
+            </div>
+
+            <!-- Circle Card 5 -->
+            <div>
+                <div class="circle-card">
+                    <img src="{% static 'app/images/team/n5.jpg' %}" alt="Person 5">
+                </div>
+                <div class="circle-name">Bags</div>
+            </div>
+        </div>        
+    </div>
+</div>
+{% endblock information %}
+{% block featured-section %}
+<div class="container my-5">
+    <h2 class="text-center display-5" style="font-size: 36px; font-weight: bold; position: relative;">
+        <span style="position: relative; z-index: 1;">Shop Our Collection</span>
+        <span style="content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 50px; height: 4px; background-color: #28a745;"></span>
+    </h2>
+    <p class="text-center mb-5" style="font-size: 18px; color: #6c757d;">Browse through our latest collections</p>
+
+    <style>
+        /* Tabs Styling */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .tab-item {
+            padding: 10px 20px;
+            border-radius: 20px;
+            background-color:rgb(223, 229, 224);
+            color: black;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .tab-item:hover,
+        .tab-item.active {
+            background-color:rgb(189, 193, 190);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* Card Section */
+        .card-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            width: 22%;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .card img {
+            width: 100%;
+            {% comment %} height: 250px; /* Fixed height for uniformity */ {% endcomment %}
+            object-fit: cover; /* Ensures the image covers the area without distortion */
+        }
+
+        .card-body {
+            padding: 15px;
+            text-align: center;
+            flex: 1; /* Ensures equal height for text section */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .card-price {
+            color: #28a745;
+            font-size: 18px;
+            font-weight: 700;
+        }
+    </style>
+
+    <!-- Tabs -->
+    <div class="tabs">
+        <div class="tab-item active" data-target="new-arrivals">New Arrivals</div>
+        <div class="tab-item" data-target="best-sellers">Best Sellers</div>
+        <div class="tab-item" data-target="on-sale">On Sale</div>
+    </div>
+
+    <!-- Cards Section -->
+    <div id="card-sections">
+        <!-- New Arrivals (Default) -->
+        <div class="card-container" id="new-arrivals" style="display: flex;">
+            <a href="{% url 'category' 'PW' %}" class="card">
+                <img src="{% static 'app/images/product/suit.jpg' %}" alt="Item 1" ">
+                <div class="card-body">
+                    <p class="card-title">Item 1</p>
+                    <p class="card-price">$20.00</p>
+                </div> 
+            </a>
+            <a href="{% url 'category' 'MW' %}" class="card">
+                <img src="{% static 'app/images/product/shirt.jpg' %}" alt="Item 2">
+                <div class="card-body">
+                    <p class="card-title">Item 2</p>
+                    <p class="card-price">$25.00</p>
+                </div>
+            </a>
+            <a href="{% url 'category' 'WW' %}" class="card">
+                <img src="{% static 'app/images/women/lady1.jpg' %}" alt="Item 3">
+                <div class="card-body">
+                    <p class="card-title">Item 3</p>
+                    <p class="card-price">$30.00</p>
+                </div>
+            </a>
+            <a href="{% url 'category' 'PW' %}" class="card">
+                <img src="{% static 'app/images/product/man-suit.jpg' %}" alt="Item 4">
+                <div class="card-body">
+                    <p class="card-title">Item 4</p>
+                    <p class="card-price">$18.00</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Best Sellers -->
+        <div class="card-container" id="best-sellers" style="display: none;">
+            <a href="{% url 'category' 'PW' %}" class="card">
+                <img src="{% static 'app/images/product/Elegant-suit.jpg' %}" alt="Bestseller 1">
+                <div class="card-body">
+                    <p class="card-title">Bestseller 1</p>
+                    <p class="card-price">$35.00</p>
+                </div>
+            </a>
+            <a href="{% url 'category' 'WW' %}" class="card">
+                <img src="{% static 'app/images/women/lady2.jpg' %}" alt="Bestseller 2">
+                <div class="card-body">
+                    <p class="card-title">Bestseller 2</p>
+                    <p class="card-price">$40.00</p>
+                </div>
+            </a>
+            <a href="{% url 'category' 'MW' %}" class="card">
+                <img src="{% static 'app/images/product/blue-suit.jpg' %}" alt="Bestseller 3">
+                <div class="card-body">
+                    <p class="card-title">Bestseller 3</p>
+                    <p class="card-price">$40.00</p>
+                </div>
+            </a>
+            <a href="{% url 'category' 'WW' %}" class="card">
+                <img src="{% static 'app/images/women/lady3.jpg' %}" alt="Bestseller 4">
+                <div class="card-body">
+                    <p class="card-title">Bestseller 4</p>
+                    <p class="card-price">$40.00</p>
+                </div>
+            </a>
+        </div>
+        <!-- On Sale -->
+        <div class="card-container" id="on-sale" style="display: none;">
+            <a href="{% url 'category' 'MW' %}" class="card">
+                <img src="{% static 'app/images/product/blazer.jpg' %}" alt="Sale 1">
+                <div class="card-body">
+                    <p class="card-title">Sale Item 1</p>
+                    <p class="card-price">$15.00</p>
+                </div>
+            </a>
+            <a href="{% url 'category' 'WW' %}" class="card">
+                <img src="{% static 'app/images/women/lady4.jpg' %}" alt="Sale 2">
+                <div class="card-body">
+                    <p class="card-title">Sale Item 2</p>
+                    <p class="card-price">$12.00</p>
+                </div>
+            </a>
+            <a href="{% url 'category' 'WW' %}" class="card">
+                <img src="{% static 'app/images/women/lady5.jpg' %}" alt="Sale 2">
+                <div class="card-body">
+                    <p class="card-title">Sale Item 3</p>
+                    <p class="card-price">$12.00</p>
+                </div>
+            </a>
+            <a href="{% url 'category' 'WW' %}" class="card">
+                <img src="{% static 'app/images/women/lady6.jpg' %}" alt="Sale 2">
+                <div class="card-body">
+                    <p class="card-title">Sale Item 4</p>
+                    <p class="card-price">$12.00</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const tabs = document.querySelectorAll(".tab-item");
+            const sections = document.querySelectorAll(".card-container");
+
+            tabs.forEach(tab => {
+                tab.addEventListener("click", function () {
+                    tabs.forEach(t => t.classList.remove("active"));
+                    this.classList.add("active");
+
+                    const target = this.getAttribute("data-target");
+                    sections.forEach(section => {
+                        section.style.display = section.id === target ? "flex" : "none";
+                    });
+                });
+            });
+        });
+    </script>
+</div>
+{% endblock featured-section %}
+
+{% block popular %}
+<div class="container my-5">
+    <h2 class="text-center display-5" style="font-size: 36px; font-weight: bold; position: relative;">
+        <span style="position: relative; z-index: 1;">Most Popular</span>
+        <span style="content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background-color: #28a745;"></span>
+    </h2>
+    <p class="text-center mb-5" style="font-size: 18px; color: #6c757d;">Discover some of our most-loved products</p>
+
+    <style>
+        /* Styling for Popular Products Section */
+        .popular-products {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: nowrap;
+        }
+
+        .popular-card {
+            width: 24%;
+            height: 350px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .popular-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .popular-card img {
+            width: 100%;
+            
+            object-fit: cover;
+        }
+
+        .popular-card-body {
+            padding: 15px;
+        }
+
+        .popular-card-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .popular-card-price {
+            color: #28a745;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+
+    <div class="popular-products">
+        <a href="{% url 'category' 'SH' %}" class="popular-card">
+            <img src="{% static 'app/images/shoes/shoes1.jpg' %}" alt="Popular Product 1" ">
+            {% comment %} <div class="popular-card-body">
+                <p class="popular-card-title">Popular Product 1</p>
+                <p class="popular-card-price">$45.00</p>
+            </div> {% endcomment %}
+        </a>
+        <a href="{% url 'category' 'SH' %}" class="popular-card">
+            <img src="{% static 'app/images/shoes/shoes2.jpg' %}" alt="Popular Product 2">
+            <div class="popular-card-body">
+                <p class="popular-card-title">Popular Product 2</p>
+                <p class="popular-card-price">$55.00</p>
+            </div>
+        </a>
+        <a href="{% url 'category' 'SH' %}" class="popular-card">
+            <img src="{% static 'app/images/shoes/shoes3.jpg' %}" alt="Popular Product 3">
+            <div class="popular-card-body">
+                <p class="popular-card-title">Popular Product 3</p>
+                <p class="popular-card-price">$35.00</p>
+            </div>
+        </a>
+        <a href="{% url 'category' 'SH' %}" class="popular-card">
+            <img src="{% static 'app/images/shoes/n4.jpg' %}" alt="Popular Product 4">
+            <div class="popular-card-body">
+                <p class="popular-card-title">Popular Product 4</p>
+                <p class="popular-card-price">$40.00</p>
+            </div>
+        </a>
+    </div>
+    <br><br><br><br>
+    <div class="popular-products">
+        <a href="{% url 'category' 'BG' %}" class="popular-card">
+            <img src="{% static 'app/images/bags/bag1.jpg' %}" alt="Popular Product 1">
+            <div class="popular-card-body">
+                <p class="popular-card-title">Popular Product 1</p>
+                <p class="popular-card-price">$45.00</p>
+            </div>
+        </a>
+        <a href="{% url 'category' 'BG' %}" class="popular-card">
+            <img src="{% static 'app/images/bags/bag2.jpg' %}" alt="Popular Product 2" >
+            <div class="popular-card-body">
+                <p class="popular-card-title">Popular Product 2</p>
+                <p class="popular-card-price">$55.00</p>
+            </div>
+        </a>
+        <a href="{% url 'category' 'BG' %}" class="popular-card">
+            <img src="{% static 'app/images/bags/bag3.jpg' %}" alt="">
+            <div class="popular-card-body">
+                {% comment %} <p class="popular-card-title">Popular Product 3</p>
+                <p class="popular-card-price">$35.00</p> {% endcomment %}
+            </div>
+        </a>
+        <a href="{% url 'category' 'BG' %}" class="popular-card">
+            <img src="{% static 'app/images/bags/n5.jpg' %}" alt="Popular Product 4">
+            <div class="popular-card-body">
+                <p class="popular-card-title">Popular Product 4</p>
+                <p class="popular-card-price">$40.00</p>
+            </div>
+        </a>
+    </div>
+</div>
+{% endblock popular %}
+<br><br><br><br>
+{% block pic %}
+<section class="testimonial-section">
+    <div class="background-image"></div>
+    <div class="testimonial-content">
+        <p class="stars">★★★★★</p>
+        <p class="quote">"ShopperStop is my ultimate fashion destination! The curated collections seamlessly blend contemporary trends with timeless style, making every purchase a delightful experience. The quality of their apparel is exceptional, and I admire the brand's commitment to sustainable fashion. What truly sets ShopperStop apart is their dedication to customer satisfaction and an unmatched shopping experience."</p>
+        <p class="author">- Amy, Dedicated ShopperStop Enthusiast</p>
+    </div>
+</section>
+
+<style>
+    .quote, .author {
+        font-size: 25px;
+        color: white; /* Changed font color to white */
+    }
+
+    .testimonial-section {
+        position: relative;
+        text-align: center;
+        color: white;
+        {% comment %} padding: 100px 20px; {% endcomment %}
+        padding-top : 200px;
+        font-family: 'Times New Roman', serif;
+        overflow: hidden;
+        height: 700px;
+        display: flex; /* Use flexbox for alignment */
+        flex-direction: column; /* Stack content vertically */
+        justify-content: flex-end; /* Move content to the bottom */
+    }
+
+    .background-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("{% static 'app/images/banner/c1.jpg' %}") no-repeat center center/cover;
+        z-index: -1;
+        opacity: 0.8; /* Increased transparency of the image */
+        transform: scale(1);
+        transition: transform 1s ease-in-out;
+    }
+
+    .testimonial-section:hover .background-image {
+        transform: scale(1.05);
+    }
+
+    .testimonial-content {
+        position: relative;
+        max-width: 800px;
+        margin: auto;
+        animation: fadeIn 2s ease-in-out;
+        {% comment %} background: rgba(0, 0, 0, 0.4); /* Added a semi-transparent background */ {% endcomment %}
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .stars {
+        font-size: 30px;
+        margin-bottom: 20px;
+        color: white; /* Ensure stars are also white */
+    }
+</style>
+{% endblock pic %}
+
+{% block sale-timer-section %}
+<div class="sale-banner-container my-5">
+    <div class="sale-banner">
+        <div class="text-section">
+            <h2 class="title">Limited-Time Deals On!</h2>
+            <p class="subtitle">Up to 50% Off Selected Styles. Don't Miss Out.</p>
+            <a href="#" class="shop-now-btn">Shop Now <span>→</span></a>
+        </div>
+        <div class="countdown-timer">
+            <div class="time-box">
+                <span class="time" id="days">00</span>
+                <span class="label">Days</span>
+            </div>
+            <span class="colon">:</span>
+            <div class="time-box">
+                <span class="time" id="hours">00</span>
+                <span class="label">Hours</span>
+            </div>
+            <span class="colon">:</span>
+            <div class="time-box">
+                <span class="time" id="minutes">00</span>
+                <span class="label">Mins</span>
+            </div>
+            <span class="colon">:</span>
+            <div class="time-box">
+                <span class="time" id="seconds">00</span>
+                <span class="label">Secs</span>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+        .sale-banner-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f8f8f8;
+            padding: 60px 20px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sale-banner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .text-section {
+            flex: 1;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #222222;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #666666;
+            margin-bottom: 25px;
+            font-weight: 400;
+        }
+
+        .shop-now-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #000000;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .shop-now-btn span {
+            margin-left: 8px;
+            font-weight: 700;
+        }
+
+        .shop-now-btn:hover {
+            background-color: #444444;
+            transform: scale(1.05);
+        }
+
+        .countdown-timer {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex: 1;
+            justify-content: flex-end;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .time-box {
+            text-align: center;
+        }
+
+        .time {
+            font-size: 40px;
+            font-weight: 700;
+            color: #222222;
+        }
+
+        .label {
+            font-size: 16px;
+            color: #666666;
+            margin-top: 5px;
+            font-weight: 400;
+        }
+
+        .colon {
+            font-size: 40px;
+            font-weight: 700;
+            color: #222222;
+        }
+    </style>
+
+    <script>
+        // Set the target date and time for the countdown
+        const targetDate = new Date().getTime() + 11 * 24 * 60 * 60 * 1000; // 11 days from now
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeLeft = targetDate - now;
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days.toString().padStart(2, "0");
+            document.getElementById("hours").innerText = hours.toString().padStart(2, "0");
+            document.getElementById("minutes").innerText = minutes.toString().padStart(2, "0");
+            document.getElementById("seconds").innerText = seconds.toString().padStart(2, "0");
+
+            if (timeLeft < 0) {
+                clearInterval(timerInterval);
+                document.querySelector(".countdown-timer").innerHTML = "Sale Ended!";
+            }
+        }
+
+        const timerInterval = setInterval(updateCountdown, 1000);
+    </script>
+</div>
+{% endblock sale-timer-section %}
+{% block shop %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Hero Section</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+        }
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 90vh;
+            background: linear-gradient(
+                rgba(0, 0, 0, 0.2), /* Added overlay for transparency */
+                rgba(0, 0, 0, 0.2)
+            ), url("{% static 'app/images/banner/couple.jpg' %}") no-repeat center center/cover;
+            display: flex;
+            align-items: flex-end; /* Align content to the bottom */
+            justify-content: flex-end; /* Align content to the right */
+            color: white;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+            padding-bottom: 55px;
+        }
+        .hero.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .hero-content {
+            background: rgba(0, 0, 0, 0.7); /* Slightly reduced transparency */
+            padding: 20px 40px;
+            border-radius: 8px;
+            margin: 20px; /* Added margin for spacing from the edges */
+        }
+        h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: right; /* Text aligned to the right */
+        }
+        p {
+            font-size: 1.2rem;
+            margin: 10px 0;
+            text-align: right; /* Text aligned to the right */
+            color: white;
+        }
+        .shop-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            margin-top: 20px;
+            font-size: 1rem;
+            color: white;
+            background: transparent;
+            border: 2px solid white;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+        }
+        .shop-btn:hover {
+            background: white;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <h1>Discover Fashion Excellence</h1>
+            <p style="color: white;">ShopperStop brings you the latest trends with a touch of elegance. Elevate your style now.</p>
+            <a href="index.html" class="shop-btn">SHOP NOW</a>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const heroSection = document.getElementById("hero");
+            function handleScroll() {
+                if (window.scrollY >= 50) {
+                    heroSection.classList.add("active");
+                }
+            }
+            window.addEventListener("scroll", handleScroll);
+        });
+    </script>
+</body>
+</html>
+{% endblock shop %}
+<br><br>
+{% block info %}
+<div class="info-section">
+    <div class="info-item">
+        <i class="icon">&#x21B6;</i>
+        <h3>14-Day Returns</h3>
+        <p>Risk-free shopping with easy returns.</p>
+    </div>
+    <div class="info-item">
+        <i class="icon">&#x1F69A;</i>
+        <h3>Free Shipping</h3>
+        <p>No extra costs, just the price you see.</p>
+    </div>
+    <div class="info-item">
+        <i class="icon">&#x1F4E2;</i>
+        <h3>24/7 Support</h3>
+        <p>24/7 support, always here just for you.</p>
+    </div>
+    <div class="info-item">
+        <i class="icon">&#x1F396;</i>
+        <h3>Member Discounts</h3>
+        <p>Special prices for our loyal customers.</p>
+    </div>
+</div>
+
+<style>
+.info-section {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    padding: 20px;
+    padding-left:180px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    font-family: 'Arial', sans-serif;
+    color: #222;
+    width: 95%;
+}
+
+.info-item {
+    flex: 1;
+    padding: 10px;
+}
+
+.icon {
+    font-size: 30px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+p {
+    font-size: 15px;
+    color: #555;
+}
+</style>
+
+{% endblock info %}
+{% block footer %}
+<div class="footer">
+    <div class="footer-column">
+        <h3>Menu</h3>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="{% url 'about' %}">About Us</a></li>
+            <li><a href="{% url 'contact' %}">Contact Us</a></li>
+        </ul>
+    </div>
+    <div class="footer-column">
+        <h3>Categories</h3>
+        <ul>
+            <li><a href="{% url 'category' 'MW' %}">Mens Wear</a></li>
+            <li><a href="{% url 'category' 'WW' %}">Womens Wear</a></li>
+            <li><a href="{% url 'category' 'SH' %}">Shoes</a></li>
+            <li><a href="{% url 'category' 'MW' %}">Bags</a></li>
+        </ul>
+    </div>
+    <div class="footer-column">
+        <h3>Resources</h3>
+        <ul>
+            <li><a href="#">Contact Support</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Live Chat</a></li>
+            <li><a href="#">Returns</a></li>
+        </ul>
+    </div>
+    <div class="footer-column">
+        <h3>Social Media</h3>
+        <ul>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Pinterest</a></li>
+        </ul>
+    </div>
+</div>
+
+<style>
+.footer {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    background-color: #f8f8f8;
+    font-family: 'Arial', sans-serif;
+    color: #222;
+    width: 100%;
+    padding-left: 220px;
+}
+.footer-column {
+    flex: 1;
+    padding: 10px;
+}
+h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+ul {
+    list-style: none;
+    padding: 0;
+}
+li {
+    margin: 5px 0;
+}
+li a {
+    text-decoration: none;
+    color: #555;
+    font-size: 14px;
+}
+</style>
+{% endblock footer %}

@@ -1,0 +1,319 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}About{% endblock title %}
+
+{% block main %}
+<style>
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+  }
+  body {
+      background: #f8f8f8;
+      color: #333;
+  }
+  .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background: url("{% static 'app/images/banner/b5.jpg' %}") no-repeat center center/cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color:rgb(16, 172, 172);
+      padding: 20px;
+      padding-top: 200px;
+  }
+  .hero h1 {
+      font-size: 3rem;
+      animation: fadeIn 2s ease-in-out;
+  }
+  .hero p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      opacity: 0.8;
+  }
+  .about-section {
+      padding: 50px;
+      background: white;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+  }
+  .about-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #222;
+  }
+  .about-section p {
+      font-size: 1.2rem;
+      color: #555;
+  }
+  .features {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 40px;
+  }
+  .feature {
+      background: #fff;
+      padding: 20px;
+      width: 30%;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+  }
+  .feature:hover {
+      transform: translateY(-10px);
+  }
+  @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+  }
+</style>
+
+<div class="hero">
+    <div>
+        <h1>Welcome to Shoppers Stop</h1>
+        <p>Your Ultimate Fashion Destination with Unlimited Designs</p>
+    </div>
+</div>
+
+<div class="about-section" id="about-section">
+    <h2>Who We Are</h2>
+    <p>Shoppers Stop is your go-to online fashion world, bringing you the latest trends, exclusive deals, and an endless variety of styles for every occasion.</p>
+    <div class="features">
+        <div class="feature">
+            <h3>Exclusive Collections</h3>
+            <p>Discover the latest designs curated from top fashion brands.</p>
+        </div>
+        <div class="feature">
+            <h3>Unlimited Choices</h3>
+            <p>From casual to luxury, we have something for everyone.</p>
+        </div>
+        <div class="feature">
+            <h3>Fast & Secure Shopping</h3>
+            <p>Seamless experience with easy checkout and fast delivery.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        window.addEventListener('scroll', function() {
+            const about = document.getElementById('about-section');
+            const position = about.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.3;
+            if (position < screenPosition) {
+                about.style.opacity = '1';
+                about.style.transform = 'translateY(0)';
+            }
+        });
+    });
+</script>
+{% endblock main %}
+
+
+{% block shop %}
+<style>
+    .hero-shop {
+        position: relative;
+        width: 100%;
+        height: 90vh;
+        background: linear-gradient(
+            rgba(0, 0, 0, 0.2),
+            rgba(0, 0, 0, 0.2)
+        ), url("{% static 'app/images/banner/couple.jpg' %}") no-repeat center center/cover;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+        color: white;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+        padding-bottom: 55px;
+    }
+    .hero-shop.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .hero-content {
+        background: rgba(0, 0, 0, 0.7);
+        padding: 20px 40px;
+        border-radius: 8px;
+        margin: 20px;
+    }
+    .shop-btn {
+        display: inline-block;
+        padding: 12px 24px;
+        font-size: 1rem;
+        color: white;
+        border: 2px solid white;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: all 0.3s ease-in-out;
+    }
+    .shop-btn:hover {
+        background: white;
+        color: black;
+    }
+</style>
+
+<section class="hero-shop" id="hero-shop">
+    <div class="hero-content">
+        <h1>Discover Fashion Excellence</h1>
+        <p>ShopperStop brings you the latest trends with a touch of elegance. Elevate your style now.</p>
+        <a href="index.html" class="shop-btn">SHOP NOW</a>
+    </div>
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const heroSection = document.getElementById("hero-shop");
+        function handleScroll() {
+            if (window.scrollY >= 50) {
+                heroSection.classList.add("active");
+            }
+        }
+        window.addEventListener("scroll", handleScroll);
+    });
+</script>
+{% endblock shop %} 
+
+{% block info %}
+<div class="info-section">
+    <div class="info-item">
+        <i class="icon">&#x21B6;</i>
+        <h3>14-Day Returns</h3>
+        <p>Risk-free shopping with easy returns.</p>
+    </div>
+    <div class="info-item">
+        <i class="icon">&#x1F69A;</i>
+        <h3>Free Shipping</h3>
+        <p>No extra costs, just the price you see.</p>
+    </div>
+    <div class="info-item">
+        <i class="icon">&#x1F4E2;</i>
+        <h3>24/7 Support</h3>
+        <p>24/7 support, always here just for you.</p>
+    </div>
+    <div class="info-item">
+        <i class="icon">&#x1F396;</i>
+        <h3>Member Discounts</h3>
+        <p>Special prices for our loyal customers.</p>
+    </div>
+</div>
+
+<style>
+.info-section {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    padding: 20px;
+    padding-left:180px;
+    font-family: 'Arial', sans-serif;
+    color: #222;
+    width: 95%;
+}
+
+.info-item {
+    flex: 1;
+    padding: 10px;
+}
+
+.icon {
+    font-size: 30px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+p {
+    font-size: 15px;
+    color: #555;
+}
+</style>
+
+{% endblock info %}
+{% block footer %}
+<div class="footer">
+    <div class="footer-column">
+        <h3>Menu</h3>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Shop</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+    </div>
+    <div class="footer-column">
+        <h3>Categories</h3>
+        <ul>
+            <li><a href="#">Casual</a></li>
+            <li><a href="#">Work & Office</a></li>
+            <li><a href="#">Activewear</a></li>
+            <li><a href="#">Evening Dresses</a></li>
+        </ul>
+    </div>
+    <div class="footer-column">
+        <h3>Resources</h3>
+        <ul>
+            <li><a href="#">Contact Support</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Live Chat</a></li>
+            <li><a href="#">Returns</a></li>
+        </ul>
+    </div>
+    <div class="footer-column">
+        <h3>Social Media</h3>
+        <ul>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Pinterest</a></li>
+        </ul>
+    </div>
+</div>
+
+<style>
+.footer {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    background-color:rgb(247, 241, 241);
+    font-family: 'Arial', sans-serif;
+    color: #222;
+    width: 100%;
+    padding-left: 220px;
+}
+.footer-column {
+    flex: 1;
+    padding: 10px;
+}
+h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+ul {
+    list-style: none;
+    padding: 0;
+}
+li {
+    margin: 5px 0;
+}
+li a {
+    text-decoration: none;
+    color: #555;
+    font-size: 14px;
+}
+</style>
+{% endblock footer %}
